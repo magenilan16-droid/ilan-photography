@@ -64,7 +64,7 @@
       font-size: 1.45rem; letter-spacing: .14em; text-transform: uppercase;
     }
     nav .logo span { color: var(--accent); }
-    nav ul { display: flex; gap: 34px; list-style: none; }
+    nav ul { display: flex; align-items: center; gap: 34px; list-style: none; }
     nav ul a {
       font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
       color: var(--text-dim); position: relative; transition: color .3s;
@@ -175,13 +175,15 @@
     /* =========================================================
        PORTFOLIO GALLERY
        ========================================================= */
-    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; grid-auto-flow: dense; }
+    .gallery { column-count: 3; column-gap: 16px; }
     .gallery .tile {
-      position: relative; overflow: hidden; aspect-ratio: 3/4; cursor: pointer;
+      position: relative; overflow: hidden; cursor: pointer;
+      break-inside: avoid; margin-bottom: 16px; border-radius: 2px;
     }
-    .gallery .tile.wide { grid-column: span 2; aspect-ratio: 16/10; }
-    .gallery .tile img { transition: transform 1.1s cubic-bezier(.2,.8,.2,1); }
-    .gallery .tile:hover img { transform: scale(1.08); }
+    .gallery .tile.is-hidden { display: none; }
+    .gallery .tile img { height: auto; transition: transform 1.1s cubic-bezier(.2,.8,.2,1); }
+    .gallery .tile:hover img { transform: scale(1.05); }
+    .load-more-wrap { text-align: center; margin-top: 50px; }
     .gallery .tile .cap {
       position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
       padding: 26px; background: linear-gradient(transparent 45%, rgba(10,10,12,.85));
@@ -240,14 +242,12 @@
       nav ul a { font-size: 1rem; }
       .nav-toggle { display: block; z-index: 110; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .gallery { grid-template-columns: repeat(2, 1fr); }
-      .gallery .tile.wide { grid-column: span 2; }
+      .gallery { column-count: 2; }
       .svc-grid { grid-template-columns: 1fr; }
       section { padding: 80px 0; }
     }
     @media (max-width: 520px) {
-      .gallery { grid-template-columns: 1fr; }
-      .gallery .tile, .gallery .tile.wide { grid-column: span 1; aspect-ratio: 4/5; }
+      .gallery { column-count: 1; }
       .stats { gap: 30px; }
     }
   </style>
@@ -256,15 +256,15 @@
 
   <!-- ============ NAV ============ -->
   <nav id="nav">
-    <a href="#top" class="logo">ILAN<span>.</span>MAGEN</a>
+    <a href="#top" class="logo">MAGEN<span>.</span>TRAVELS</a>
     <div class="nav-right">
       <ul id="navMenu">
         <li><a href="#about" data-he="אודות">About</a></li>
         <li><a href="#work" data-he="עבודות">Work</a></li>
         <li><a href="#services" data-he="שירותים">Services</a></li>
         <li><a href="#contact" data-he="צור קשר">Contact</a></li>
+        <li><button class="lang-btn" id="langBtn" aria-label="Switch language">עברית</button></li>
       </ul>
-      <button class="lang-btn" id="langBtn" aria-label="Switch language">עברית</button>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
     </div>
   </nav>
@@ -315,20 +315,22 @@
         <p data-he="מבחר עבודות של מקומות שהיה לי העונג לצלם.">A curated selection of spaces and places I've had the pleasure to capture.</p>
       </div>
       <div class="gallery">
-        <!-- 🔁 Captions are placeholders — tell me real locations/titles and I'll update. -->
         <div class="tile reveal"><img src="images/g1.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="וילה פרטית">Private Villa</span><span class="t" data-he="קצה אינסופי">Infinity Edge</span></div></div>
         <div class="tile reveal"><img src="images/g2.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="אטרקציה">Attraction</span><span class="t" data-he="לגונה נסתרת">Hidden Lagoon</span></div></div>
         <div class="tile reveal"><img src="images/g3.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="ריזורט">Resort</span><span class="t" data-he="מפלט אל האי">Island Escape</span></div></div>
-        <div class="tile wide reveal"><img src="images/g4.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="קו חוף">Coastline</span><span class="t" data-he="מפרץ נסתר">Secret Cove</span></div></div>
+        <div class="tile reveal"><img src="images/g4.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="קו חוף">Coastline</span><span class="t" data-he="מפרץ נסתר">Secret Cove</span></div></div>
         <div class="tile reveal"><img src="images/g5.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="אטרקציה">Attraction</span><span class="t" data-he="מעל העננים">Above the Clouds</span></div></div>
         <div class="tile reveal"><img src="images/g6.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="ריזורט">Resort</span><span class="t" data-he="סוויטות על החוף">Beachfront Suites</span></div></div>
-        <div class="tile reveal"><img src="images/g7.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="תיירות">Travel</span><span class="t" data-he="מים שקטים">Still Waters</span></div></div>
-        <div class="tile wide reveal"><img src="images/g8.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="נכס">Property</span><span class="t" data-he="המפלט">The Retreat</span></div></div>
-        <div class="tile reveal"><img src="images/g9.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="ריזורט">Resort</span><span class="t" data-he="ליד הבריכה">Poolside</span></div></div>
-        <div class="tile reveal"><img src="images/g10.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="טבע">Nature</span><span class="t" data-he="מפל הקשת">Rainbow Falls</span></div></div>
-        <div class="tile wide reveal"><img src="images/g11.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="תיירות">Travel</span><span class="t" data-he="עיר התעלות">Canal City</span></div></div>
-        <div class="tile reveal"><img src="images/g12.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="נוף">Landscape</span><span class="t" data-he="פיתול הנהר">River Bend</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/g7.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="תיירות">Travel</span><span class="t" data-he="מים שקטים">Still Waters</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/g8.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="נכס">Property</span><span class="t" data-he="המפלט">The Retreat</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/g9.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="ריזורט">Resort</span><span class="t" data-he="ליד הבריכה">Poolside</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/g10.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="טבע">Nature</span><span class="t" data-he="מפל הקשת">Rainbow Falls</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/g11.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="תיירות">Travel</span><span class="t" data-he="עיר התעלות">Canal City</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/g12.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="נוף">Landscape</span><span class="t" data-he="פיתול הנהר">River Bend</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/hero.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="שעת הזהב">Golden Hour</span><span class="t" data-he="שקיעה אדריאטית">Adriatic Sunset</span></div></div>
+        <div class="tile reveal is-hidden"><img src="images/contact.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="אחרי החשכה">After Dark</span><span class="t" data-he="פסטיבל הפנסים">Lantern Festival</span></div></div>
       </div>
+      <div class="load-more-wrap"><button class="btn" id="loadMore" data-he="הצג עוד תמונות">Show More Work</button></div>
     </div>
   </section>
 
@@ -372,7 +374,7 @@
   <!-- ============ FOOTER ============ -->
   <footer>
     <div class="wrap foot">
-      <a href="#top" class="logo">ILAN<span>.</span>MAGEN</a>
+      <a href="#top" class="logo">MAGEN<span>.</span>TRAVELS</a>
       <div class="social">
         <a href="https://instagram.com/magen_travels" target="_blank" rel="noopener">@magen_travels</a>
         <a href="mailto:ilanm.travels@gmail.com" data-he="מייל">Email</a>
@@ -412,6 +414,16 @@
     let savedLang = 'en';
     try { savedLang = localStorage.getItem('site-lang') || 'en'; } catch (e) {}
     if (savedLang === 'he') setLang('he');
+
+    /* ---- gallery: show more ---- */
+    const loadMore = document.getElementById('loadMore');
+    if (loadMore) loadMore.addEventListener('click', () => {
+      document.querySelectorAll('.gallery .tile.is-hidden').forEach(t => {
+        t.classList.remove('is-hidden');
+        t.classList.add('in');
+      });
+      loadMore.style.display = 'none';
+    });
 
     /* ---- reveal on scroll ---- */
     const io = new IntersectionObserver((entries) => {
