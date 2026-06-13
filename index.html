@@ -9,7 +9,7 @@
   <!-- ===== FONTS ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;600&family=Frank+Ruhl+Libre:wght@500;600&display=swap" rel="stylesheet" />
 
   <style>
     /* =========================================================
@@ -75,7 +75,25 @@
     }
     nav ul a:hover { color: var(--text); }
     nav ul a:hover::after { width: 100%; }
-    .nav-toggle { display: none; background: none; border: 0; color: var(--text); font-size: 1.6rem; cursor: pointer; }
+    .nav-toggle { display: none; background: none; border: 0; color: var(--text); font-size: 1.6rem; cursor: pointer; z-index: 110; }
+    .nav-right { display: flex; align-items: center; gap: 30px; }
+    .lang-btn {
+      background: transparent; border: 1px solid var(--line); color: var(--text);
+      padding: 8px 16px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+      cursor: pointer; transition: border-color .3s, color .3s; z-index: 110;
+      font-family: inherit; line-height: 1; white-space: nowrap;
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== Hebrew / RTL ===== */
+    html[lang="he"] { direction: rtl; }
+    html[lang="he"] body { font-family: 'Heebo', system-ui, sans-serif; }
+    html[lang="he"] h1, html[lang="he"] h2, html[lang="he"] h3 { font-family: 'Frank Ruhl Libre', 'Heebo', serif; }
+    html[lang="he"] .logo { font-family: 'Cormorant Garamond', serif; } /* keep brand mark latin */
+    html[lang="he"] .hero h1 em, html[lang="he"] .contact h2 em { font-style: normal; } /* Hebrew has no italics */
+    html[lang="he"] .eyebrow, html[lang="he"] nav ul a, html[lang="he"] .lang-btn,
+    html[lang="he"] .stat .lbl, html[lang="he"] .gallery .tile .cap .s,
+    html[lang="he"] .foot .social a, html[lang="he"] .btn { letter-spacing: .04em; text-transform: none; }
 
     /* =========================================================
        HERO
@@ -239,13 +257,16 @@
   <!-- ============ NAV ============ -->
   <nav id="nav">
     <a href="#top" class="logo">ILAN<span>.</span>MAGEN</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
-    <ul id="navMenu">
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul id="navMenu">
+        <li><a href="#about" data-he="אודות">About</a></li>
+        <li><a href="#work" data-he="עבודות">Work</a></li>
+        <li><a href="#services" data-he="שירותים">Services</a></li>
+        <li><a href="#contact" data-he="צור קשר">Contact</a></li>
+      </ul>
+      <button class="lang-btn" id="langBtn" aria-label="Switch language">עברית</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
   </nav>
 
   <!-- ============ HERO ============ -->
@@ -254,15 +275,15 @@
       <img src="images/hero.jpg" alt="Dramatic ocean sunset" />
     </div>
     <div class="wrap hero-content">
-      <p class="eyebrow">Hospitality · Travel · Architecture</p>
-      <h1>Spaces that tell a <em>story</em>.</h1>
-      <p>Cinematic photography for hotels, apartments and attractions around the world — capturing your space in its most captivating light.</p>
+      <p class="eyebrow" data-he="צילום אווירי · אירוח · יעדים">Aerial · Hospitality · Destinations</p>
+      <h1 data-he="מקומות שמספרים <em>סיפור</em>.">Spaces that tell a <em>story</em>.</h1>
+      <p data-he="צילום אווירי ותיירותי קולנועי למלונות, ריזורטים ויעדים ברחבי העולם — מציג את המקום שלכם באור הכי מרהיב.">Cinematic aerial and travel photography for hotels, resorts and destinations around the world — capturing your location in its most captivating light.</p>
       <div class="cta-row">
-        <a href="#work" class="btn">View Portfolio</a>
-        <a href="#contact" class="btn ghost">Get in touch</a>
+        <a href="#work" class="btn" data-he="לצפייה בעבודות">View Portfolio</a>
+        <a href="#contact" class="btn ghost" data-he="צרו קשר">Get in touch</a>
       </div>
     </div>
-    <div class="scroll-hint"><span>Scroll</span><span class="line"></span></div>
+    <div class="scroll-hint"><span data-he="גלול">Scroll</span><span class="line"></span></div>
   </header>
 
   <!-- ============ ABOUT ============ -->
@@ -272,14 +293,14 @@
         <img src="images/about.jpg" alt="Ilan Magen, photographer" />
       </div>
       <div class="about-text reveal">
-        <span class="eyebrow" style="color:var(--accent);letter-spacing:.34em;text-transform:uppercase;font-size:.76rem;display:block;margin-bottom:18px;">The Photographer</span>
-        <h2>Hi, I'm Ilan.</h2>
-        <p>I travel the world to photograph the places people dream of visiting. From boutique hotels to private apartments and iconic attractions, my work helps owners and brands present their spaces with the warmth, atmosphere and detail that turn a viewer into a guest.</p>
-        <p>Every frame is crafted to feel — light, mood and composition working together to make your property unforgettable.</p>
+        <span class="eyebrow" style="color:var(--accent);letter-spacing:.34em;text-transform:uppercase;font-size:.76rem;display:block;margin-bottom:18px;" data-he="הצלם">The Photographer</span>
+        <h2 data-he="היי, אני אילן.">Hi, I'm Ilan.</h2>
+        <p data-he="אני צלם תיירות ואוויר שרודף אחרי האור מסביב לעולם. כבר יותר מחמש שנים אני מצלם ריזורטים, קווי חוף ויעדים מהקרקע ומהאוויר — ועוזר לבעלים ולמותגים להציג את המקום שלהם בעוצמה, באווירה וברגש שהופכים צופה לאורח.">I'm a travel and aerial photographer chasing light across the globe. For over five years I've captured resorts, coastlines and destinations from the ground and from the sky — helping owners and brands present their location with the scale, atmosphere and emotion that turn a viewer into a guest.</p>
+        <p data-he="כל פריים נבנה כדי לעורר תחושה — אור, אווירה והרכב שעובדים יחד כדי להפוך את היעד שלכם לבלתי נשכח.">Every frame is crafted to feel — light, mood and composition working together to make your destination unforgettable.</p>
         <div class="stats">
-          <div class="stat"><div class="num">10+</div><div class="lbl">Years</div></div>
-          <div class="stat"><div class="num">25</div><div class="lbl">Countries</div></div>
-          <div class="stat"><div class="num">300+</div><div class="lbl">Projects</div></div>
+          <div class="stat"><div class="num">5+</div><div class="lbl" data-he="שנים">Years</div></div>
+          <div class="stat"><div class="num">7+</div><div class="lbl" data-he="מדינות">Countries</div></div>
+          <div class="stat"><div class="num">30+</div><div class="lbl" data-he="פרויקטים">Projects</div></div>
         </div>
       </div>
     </div>
@@ -289,24 +310,24 @@
   <section id="work">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Selected Work</span>
-        <h2>A glimpse into the frame.</h2>
-        <p>A curated selection of spaces and places I've had the pleasure to capture.</p>
+        <span class="eyebrow" data-he="עבודות נבחרות">Selected Work</span>
+        <h2 data-he="הצצה אל תוך הפריים.">A glimpse into the frame.</h2>
+        <p data-he="מבחר עבודות של מקומות שהיה לי העונג לצלם.">A curated selection of spaces and places I've had the pleasure to capture.</p>
       </div>
       <div class="gallery">
         <!-- 🔁 Captions are placeholders — tell me real locations/titles and I'll update. -->
-        <div class="tile reveal"><img src="images/g1.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Private Villa</span><span class="t">Infinity Edge</span></div></div>
-        <div class="tile reveal"><img src="images/g2.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Attraction</span><span class="t">Hidden Lagoon</span></div></div>
-        <div class="tile reveal"><img src="images/g3.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Resort</span><span class="t">Island Escape</span></div></div>
-        <div class="tile wide reveal"><img src="images/g4.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Coastline</span><span class="t">Secret Cove</span></div></div>
-        <div class="tile reveal"><img src="images/g5.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Attraction</span><span class="t">Above the Clouds</span></div></div>
-        <div class="tile reveal"><img src="images/g6.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Resort</span><span class="t">Beachfront Suites</span></div></div>
-        <div class="tile reveal"><img src="images/g7.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Travel</span><span class="t">Still Waters</span></div></div>
-        <div class="tile wide reveal"><img src="images/g8.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Property</span><span class="t">The Retreat</span></div></div>
-        <div class="tile reveal"><img src="images/g9.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Resort</span><span class="t">Poolside</span></div></div>
-        <div class="tile reveal"><img src="images/g10.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Nature</span><span class="t">Rainbow Falls</span></div></div>
-        <div class="tile wide reveal"><img src="images/g11.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Travel</span><span class="t">Canal City</span></div></div>
-        <div class="tile reveal"><img src="images/g12.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Landscape</span><span class="t">River Bend</span></div></div>
+        <div class="tile reveal"><img src="images/g1.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="וילה פרטית">Private Villa</span><span class="t" data-he="קצה אינסופי">Infinity Edge</span></div></div>
+        <div class="tile reveal"><img src="images/g2.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="אטרקציה">Attraction</span><span class="t" data-he="לגונה נסתרת">Hidden Lagoon</span></div></div>
+        <div class="tile reveal"><img src="images/g3.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="ריזורט">Resort</span><span class="t" data-he="מפלט אל האי">Island Escape</span></div></div>
+        <div class="tile wide reveal"><img src="images/g4.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="קו חוף">Coastline</span><span class="t" data-he="מפרץ נסתר">Secret Cove</span></div></div>
+        <div class="tile reveal"><img src="images/g5.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="אטרקציה">Attraction</span><span class="t" data-he="מעל העננים">Above the Clouds</span></div></div>
+        <div class="tile reveal"><img src="images/g6.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="ריזורט">Resort</span><span class="t" data-he="סוויטות על החוף">Beachfront Suites</span></div></div>
+        <div class="tile reveal"><img src="images/g7.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="תיירות">Travel</span><span class="t" data-he="מים שקטים">Still Waters</span></div></div>
+        <div class="tile wide reveal"><img src="images/g8.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="נכס">Property</span><span class="t" data-he="המפלט">The Retreat</span></div></div>
+        <div class="tile reveal"><img src="images/g9.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="ריזורט">Resort</span><span class="t" data-he="ליד הבריכה">Poolside</span></div></div>
+        <div class="tile reveal"><img src="images/g10.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="טבע">Nature</span><span class="t" data-he="מפל הקשת">Rainbow Falls</span></div></div>
+        <div class="tile wide reveal"><img src="images/g11.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="תיירות">Travel</span><span class="t" data-he="עיר התעלות">Canal City</span></div></div>
+        <div class="tile reveal"><img src="images/g12.jpg" alt="" loading="lazy" /><div class="cap"><span class="s" data-he="נוף">Landscape</span><span class="t" data-he="פיתול הנהר">River Bend</span></div></div>
       </div>
     </div>
   </section>
@@ -315,19 +336,19 @@
   <section class="services" id="services">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">What I Offer</span>
-        <h2>Photography that sells the experience.</h2>
+        <span class="eyebrow" data-he="מה אני מציע">What I Offer</span>
+        <h2 data-he="צילום שמוכר את החוויה.">Photography that sells the experience.</h2>
       </div>
       <div class="svc-grid">
         <div class="svc reveal">
           <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 21V5.5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1V21"/><path d="M15 9h4a1 1 0 0 1 1 1v11"/><line x1="2" y1="21" x2="22" y2="21"/><line x1="7" y1="8" x2="7.01" y2="8"/><line x1="11" y1="8" x2="11.01" y2="8"/><line x1="7" y1="12" x2="7.01" y2="12"/><line x1="11" y1="12" x2="11.01" y2="12"/><line x1="7" y1="16" x2="7.01" y2="16"/><line x1="11" y1="16" x2="11.01" y2="16"/></svg></div>
-          <h3>Hotels & Resorts</h3><p>Full property coverage — rooms, amenities, dining and atmosphere — built to fill bookings and elevate your brand.</p></div>
+          <h3 data-he="ריזורטים ומלונות">Resorts & Hotels</h3><p data-he="כיסוי אווירי וחיצוני שלוכד את הגודל, הסביבה והאווירה של הנכס שלכם — ומציג אותו במיטבו.">Aerial and exterior coverage that captures the full scale, setting and atmosphere of your property — and shows it at its best.</p></div>
         <div class="svc reveal">
-          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/><line x1="12" y1="7.5" x2="12" y2="7.51"/></svg></div>
-          <h3>Apartments & Rentals</h3><p>Bright, inviting interiors that make short-term and vacation rentals stand out on every booking platform.</p></div>
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><circle cx="5" cy="5" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="7.1" y1="7.1" x2="9.8" y2="9.8"/><line x1="16.9" y1="7.1" x2="14.2" y2="9.8"/><line x1="7.1" y1="16.9" x2="9.8" y2="14.2"/><line x1="16.9" y1="16.9" x2="14.2" y2="14.2"/></svg></div>
+          <h3 data-he="צילום רחפן ואוויר">Aerial & Drone</h3><p data-he="מבטים עוצרי נשימה ממעוף הציפור על נכסים, קווי חוף ונופים — זוויות שצילום רגיל פשוט לא מגיע אליהן.">Breathtaking bird's-eye views of properties, coastlines and landscapes — angles that ground-level photography simply can't reach.</p></div>
         <div class="svc reveal">
           <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="4.5" y1="7" x2="19.5" y2="7"/><line x1="4.5" y1="17" x2="19.5" y2="17"/></svg></div>
-          <h3>Attractions & Travel</h3><p>Landmarks, experiences and destinations captured to inspire visitors and tell your location's unique story.</p></div>
+          <h3 data-he="יעדים ואטרקציות">Destinations & Attractions</h3><p data-he="אתרים, חופים וחוויות שמצולמים כדי לעורר השראה אצל מטיילים ולספר את הסיפור הייחודי של המקום שלכם.">Landmarks, beaches and experiences captured to inspire travelers and tell your location's unique story.</p></div>
       </div>
     </div>
   </section>
@@ -338,13 +359,12 @@
       <img src="images/contact.jpg" alt="" />
     </div>
     <div class="wrap reveal">
-      <span class="eyebrow" style="color:var(--accent);letter-spacing:.34em;text-transform:uppercase;font-size:.76rem;display:block;margin-bottom:18px;">Let's Create</span>
-      <h2>Ready to show your space in its <em>best light?</em></h2>
-      <p>Whether it's a hotel, an apartment or an attraction — let's talk about how to make it unforgettable. Available worldwide.</p>
+      <span class="eyebrow" style="color:var(--accent);letter-spacing:.34em;text-transform:uppercase;font-size:.76rem;display:block;margin-bottom:18px;" data-he="בואו ניצור">Let's Create</span>
+      <h2 data-he="מוכנים להציג את המקום שלכם <em>באור הכי טוב?</em>">Ready to show your destination in its <em>best light?</em></h2>
+      <p data-he="בין אם זה ריזורט, יעד או אטרקציה — בואו נדבר על איך להפוך אותו לבלתי נשכח. זמין בכל העולם.">Whether it's a resort, a destination or an attraction — let's talk about how to make it unforgettable. Available worldwide.</p>
       <div class="contact-links">
-        <!-- 🔁 REPLACE email + Instagram below -->
-        <a href="mailto:magenilan16@gmail.com" class="btn">✉ Email Me</a>
-        <a href="https://instagram.com/magen_travels" target="_blank" rel="noopener" class="btn ghost">◎ Instagram</a>
+        <a href="mailto:magenilan16@gmail.com" class="btn" data-he="✉ שלחו מייל">✉ Email Me</a>
+        <a href="https://instagram.com/magen_travels" target="_blank" rel="noopener" class="btn ghost" data-he="◎ אינסטגרם">◎ Instagram</a>
       </div>
     </div>
   </section>
@@ -355,9 +375,9 @@
       <a href="#top" class="logo">ILAN<span>.</span>MAGEN</a>
       <div class="social">
         <a href="https://instagram.com/magen_travels" target="_blank" rel="noopener">@magen_travels</a>
-        <a href="mailto:magenilan16@gmail.com">Email</a>
+        <a href="mailto:magenilan16@gmail.com" data-he="מייל">Email</a>
       </div>
-      <div class="copy">© 2026 Ilan Magen Photography. All rights reserved.</div>
+      <div class="copy" data-he="© 2026 אילן מגן צילום. כל הזכויות שמורות.">© 2026 Ilan Magen Photography. All rights reserved.</div>
     </div>
   </footer>
 
@@ -373,6 +393,25 @@
     const menu = document.getElementById('navMenu');
     toggle.addEventListener('click', () => menu.classList.toggle('open'));
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    /* ---- language toggle (EN default, HE full translation + RTL) ---- */
+    const root = document.documentElement;
+    const langBtn = document.getElementById('langBtn');
+    const i18nNodes = document.querySelectorAll('[data-he]');
+    i18nNodes.forEach(el => el.setAttribute('data-en', el.innerHTML.trim()));
+    function setLang(lang) {
+      root.setAttribute('lang', lang);
+      root.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
+      i18nNodes.forEach(el => {
+        el.innerHTML = lang === 'he' ? el.getAttribute('data-he') : el.getAttribute('data-en');
+      });
+      langBtn.textContent = lang === 'he' ? 'English' : 'עברית';
+      try { localStorage.setItem('site-lang', lang); } catch (e) {}
+    }
+    langBtn.addEventListener('click', () => setLang(root.getAttribute('lang') === 'he' ? 'en' : 'he'));
+    let savedLang = 'en';
+    try { savedLang = localStorage.getItem('site-lang') || 'en'; } catch (e) {}
+    if (savedLang === 'he') setLang('he');
 
     /* ---- reveal on scroll ---- */
     const io = new IntersectionObserver((entries) => {
