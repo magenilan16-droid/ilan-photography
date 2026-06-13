@@ -157,7 +157,7 @@
     /* =========================================================
        PORTFOLIO GALLERY
        ========================================================= */
-    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; grid-auto-flow: dense; }
     .gallery .tile {
       position: relative; overflow: hidden; aspect-ratio: 3/4; cursor: pointer;
     }
@@ -251,8 +251,7 @@
   <!-- ============ HERO ============ -->
   <header class="hero" id="top">
     <div class="hero-bg">
-      <!-- 🔁 REPLACE: your strongest wide hotel/landscape shot -->
-      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" alt="Luxury hotel at dusk" />
+      <img src="images/hero.jpg" alt="Dramatic ocean sunset" />
     </div>
     <div class="wrap hero-content">
       <p class="eyebrow">Hospitality · Travel · Architecture</p>
@@ -270,8 +269,7 @@
   <section class="about" id="about">
     <div class="wrap about-grid">
       <div class="about-img reveal">
-        <!-- 🔁 REPLACE: a portrait of you, or a signature shot -->
-        <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?q=80&w=1887&auto=format&fit=crop" alt="Photographer at work" />
+        <img src="images/about.jpg" alt="Ilan Magen, photographer" />
       </div>
       <div class="about-text reveal">
         <span class="eyebrow" style="color:var(--accent);letter-spacing:.34em;text-transform:uppercase;font-size:.76rem;display:block;margin-bottom:18px;">The Photographer</span>
@@ -296,13 +294,19 @@
         <p>A curated selection of spaces and places I've had the pleasure to capture.</p>
       </div>
       <div class="gallery">
-        <!-- 🔁 REPLACE each src with your own photos. Add/remove .tile blocks freely. -->
-        <div class="tile wide reveal"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2080&auto=format&fit=crop" alt="" /><div class="cap"><span class="s">Hotel · Bali</span><span class="t">Infinity Horizon</span></div></div>
-        <div class="tile reveal"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1887&auto=format&fit=crop" alt="" /><div class="cap"><span class="s">Suite · Paris</span><span class="t">The Quiet Room</span></div></div>
-        <div class="tile reveal"><img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop" alt="" /><div class="cap"><span class="s">Apartment · Lisbon</span><span class="t">Golden Hour Living</span></div></div>
-        <div class="tile reveal"><img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1887&auto=format&fit=crop" alt="" /><div class="cap"><span class="s">Resort · Maldives</span><span class="t">Over Water</span></div></div>
-        <div class="tile wide reveal"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop" alt="" /><div class="cap"><span class="s">Attraction · Santorini</span><span class="t">Cliffside Views</span></div></div>
-        <div class="tile reveal"><img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=1932&auto=format&fit=crop" alt="" /><div class="cap"><span class="s">Boutique · Tokyo</span><span class="t">Minimal Calm</span></div></div>
+        <!-- 🔁 Captions are placeholders — tell me real locations/titles and I'll update. -->
+        <div class="tile reveal"><img src="images/g1.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Private Villa</span><span class="t">Infinity Edge</span></div></div>
+        <div class="tile reveal"><img src="images/g2.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Attraction</span><span class="t">Hidden Lagoon</span></div></div>
+        <div class="tile reveal"><img src="images/g3.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Resort</span><span class="t">Island Escape</span></div></div>
+        <div class="tile wide reveal"><img src="images/g4.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Coastline</span><span class="t">Secret Cove</span></div></div>
+        <div class="tile reveal"><img src="images/g5.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Attraction</span><span class="t">Above the Clouds</span></div></div>
+        <div class="tile reveal"><img src="images/g6.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Resort</span><span class="t">Beachfront Suites</span></div></div>
+        <div class="tile reveal"><img src="images/g7.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Travel</span><span class="t">Still Waters</span></div></div>
+        <div class="tile wide reveal"><img src="images/g8.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Property</span><span class="t">The Retreat</span></div></div>
+        <div class="tile reveal"><img src="images/g9.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Resort</span><span class="t">Poolside</span></div></div>
+        <div class="tile reveal"><img src="images/g10.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Nature</span><span class="t">Rainbow Falls</span></div></div>
+        <div class="tile wide reveal"><img src="images/g11.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Travel</span><span class="t">Canal City</span></div></div>
+        <div class="tile reveal"><img src="images/g12.jpg" alt="" loading="lazy" /><div class="cap"><span class="s">Landscape</span><span class="t">River Bend</span></div></div>
       </div>
     </div>
   </section>
@@ -331,7 +335,7 @@
   <!-- ============ CONTACT ============ -->
   <section class="contact" id="contact">
     <div class="contact-bg">
-      <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop" alt="" />
+      <img src="images/contact.jpg" alt="" />
     </div>
     <div class="wrap reveal">
       <span class="eyebrow" style="color:var(--accent);letter-spacing:.34em;text-transform:uppercase;font-size:.76rem;display:block;margin-bottom:18px;">Let's Create</span>

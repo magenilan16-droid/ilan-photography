@@ -1,0 +1,8 @@
+# Original full-size photos (kept locally, not published)
+/*.jpg
+/*.jpeg
+/*.png
+/*.JPG
+
+# Thumbnails used only for previewing
+/thumbs/
